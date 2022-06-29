@@ -55,7 +55,7 @@
 
 	function emap(doc) {
 		// sort by last name, first name, and age
-		emit([doc.createdAt]);
+		emit([doc.fieldETA + doc.fieldETD]);
 	}
 	// Helper for reloading all flights from the local PouchDB. It’s on-device and haso basically zero latency,
 	// so we can use it quite liberally instead of keeping our local state up to date like you’d do

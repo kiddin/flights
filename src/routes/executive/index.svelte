@@ -49,12 +49,11 @@
 	// All the flights directly from the PouchDB. Sorting and filtering comes later
 	let flights = [];
 
-
 	function emit(val) {}
 
 	function emap(doc) {
 		// sort by last name, first name, and age
-		emit([doc.createdAt]);
+		emit([doc.fieldETA + doc.fieldETD]);
 	}
 	// Helper for reloading all flights from the local PouchDB. It’s on-device and haso basically zero latency,
 	// so we can use it quite liberally instead of keeping our local state up to date like you’d do
@@ -189,7 +188,9 @@
 		<img alt="swissport logo" src={logo} />
 		EXECUTIVE
 	</div>
-	<button class="logout" on:click={logout}><img src="/static/icon-logout.svg" width="15" alt="logout"></button>
+	<button class="logout" on:click={logout}
+		><img src="/static/icon-logout.svg" width="15" alt="logout" /></button
+	>
 </nav>
 
 <svelte:window bind:scrollY={y} bind:innerHeight={h} />
@@ -204,7 +205,7 @@
 		<div class="th">ETD</div>
 		<div class="th">PAX</div>
 		<div class="th">Status</div>
-		<div class="th" style="text-align: center;">Color</div>
+		<div class="th" />
 		<div class="th">Payment Type</div>
 		<div class="th">Notes</div>
 	</div>
