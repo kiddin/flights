@@ -170,6 +170,7 @@
 		display: flex;
 		align-items: center;
 		white-space: nowrap;
+		cursor: pointer;
 	}
 
 	.td {
