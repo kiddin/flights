@@ -12,7 +12,6 @@
 		dispatch('remove', { flight });
 	}
 
-	// We don’t want to clobber the local DB, so we debounce saving on every keystroke
 	const debouncedUpdateFlight = debounce(updateFields, 500);
 
 	function updateFieldColor(e) {
