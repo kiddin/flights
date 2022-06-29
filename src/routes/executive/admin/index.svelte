@@ -354,7 +354,7 @@
 		border: none;
 		height: 3.25vw;
 		background-color: transparent;
-		font-size: 12px;
+		font-size: 16px;
 	}
 	.logout {
 		border: none;
