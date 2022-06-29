@@ -212,7 +212,6 @@
 		<div class="th" style="text-align: center;">Color</div>
 		<div class="th">Payment Type</div>
 		<div class="th">Notes</div>
-		<div class="th">Complete</div>
 		<div class="th" />
 	</div>
 	<form on:submit|preventDefault={add}>
