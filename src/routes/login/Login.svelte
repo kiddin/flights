@@ -22,7 +22,7 @@
 </script>
 
 <nav>
-	<h1 />
+	<h1>&nbsp;</h1>
 	<div class="logo">
 		<img alt="swissport logo" src="/static/logo.png" />
 		EXECUTIVE

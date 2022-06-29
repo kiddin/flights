@@ -1,10 +1,7 @@
 <script>
-	import Flatpickr from 'svelte-flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
-	import { createEventDispatcher } from 'svelte';
 
 	export let value = '';
-	export let id = (Math.random() + 1).toString(36).substring(7);
 
 	let hour = '',
 		date = '';

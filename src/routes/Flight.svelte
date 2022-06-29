@@ -1,33 +1,14 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
-	import { fade } from 'svelte/transition';
-	import { debounce } from 'lodash';
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
-
-	const dispatch = createEventDispatcher();
-
-	function remove() {
-		dispatch('remove', { flight });
-	}
+	import { fade } from 'svelte/transition';
 
 	// We don’t want to clobber the local DB, so we debounce saving on every keystroke
-	const debouncedUpdateFlight = debounce(updateFields, 500);
-
-	function updateFieldColor(e) {
-		flight.fieldColor = e.detail.color;
-		updateFields();
-	}
-	function updateFields() {
-		dispatch('update', {
-			flight: flight
-		});
-	}
 
 	export let flight;
 </script>
 
-<form on:submit|preventDefault={updateFields}>
+<div class="tr" transition:fade>
 	<div class="td">
 		<div class="input-preview">{flight.fieldACType}</div>
 	</div>
@@ -71,7 +52,7 @@
 	<div class="td">
 		<div class="textarea-preview">{flight.fieldNotes}</div>
 	</div>
-</form>
+</div>
 
 <style>
 	.td {
@@ -80,10 +61,10 @@
 		vertical-align: middle;
 		position: relative;
 	}
-	form {
+	.tr {
 		display: table-row;
 	}
-	form:nth-child(odd) {
+	.tr:nth-child(odd) {
 		background-color: #f6f6f6;
 	}
 	.input-preview {
@@ -103,7 +84,7 @@
 		border: none;
 		height: 3.25vw;
 		background-color: transparent;
-        font-size: 12px;
+		font-size: 12px;
 		max-width: 10vw;
 	}
 </style>

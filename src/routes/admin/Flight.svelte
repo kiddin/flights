@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
 	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { debounce } from 'lodash';
+	import debounce  from 'lodash';
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
 	import { clickOutside } from '../../hooks/clickOutside';
@@ -28,7 +28,7 @@
 	export let flight;
 	let intentDelete = false;
 	let deleteButton;
-	
+
 	function handleKeydown(event) {
 		if (event.key === 'Escape') {
 			intentDelete = false;
@@ -38,7 +38,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<form on:submit|preventDefault={updateFields}>
+<form on:submit|preventDefault={updateFields} transition:fade>
 	<div class="td">
 		<input
 			placeholder="OPERATOR"
