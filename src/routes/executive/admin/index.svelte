@@ -11,7 +11,7 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 
-	$: if ($user == null && browser) goto('/executive/login');
+	$: if ($user != 'admin' && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
 	const replication = PouchDB.sync('db', 'http://46.233.0.11:5984/svelte-flight-db', {
@@ -216,8 +216,7 @@
 		<div class="th" />
 	</div>
 	<form on:submit|preventDefault={add}>
-		<div class="td">
-		</div>
+		<div class="td" />
 		<div class="td">
 			<input placeholder="OPERATOR" type="text" bind:value={fieldOperator} />
 		</div>
