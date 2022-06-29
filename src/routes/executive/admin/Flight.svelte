@@ -168,6 +168,7 @@
 		background-color: transparent;
 		height: 4vw;
 		display: flex;
+		justify-content: center;
 		align-items: center;
 		white-space: nowrap;
 		cursor: pointer;

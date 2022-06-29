@@ -200,7 +200,7 @@
 
 <div class="table" bind:this={table}>
 	<div class="tr thead" class:shadow={y > 1} style="top: {navHeight - 1}px">
-		<div class="th" />
+		<div class="th" >Comp</div>
 		<div class="th">Operator</div>
 		<div class="th">A/C type</div>
 		<div class="th">From</div>
