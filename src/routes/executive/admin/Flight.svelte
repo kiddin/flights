@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import debounce  from 'lodash';
+	import debounce from 'lodash';
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
 	import { clickOutside } from '../../../hooks/clickOutside';
@@ -24,6 +24,15 @@
 		});
 	}
 
+	function toggleStatus() {
+		dispatch('update', {
+			flight: {
+				...flight,
+				fieldComplete: !flight.fieldComplete
+			}
+		});
+	}
+
 	export let flight;
 	let intentDelete = false;
 	let deleteButton;
@@ -38,6 +47,12 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <form on:submit|preventDefault={updateFields} transition:fade>
+	<div class="td">
+		<div class="toggle-status" on:click={toggleStatus}>
+			{#if flight.fieldComplete}Y{:else}N{/if}
+		</div>
+	</div>
+
 	<div class="td">
 		<input
 			placeholder="OPERATOR"
@@ -145,6 +160,18 @@
 </form>
 
 <style>
+	.toggle-status {
+		width: 100%;
+		border: none;
+		font-size: 2vw;
+		letter-spacing: -0.15vw;
+		background-color: transparent;
+		height: 4vw;
+		display: flex;
+		align-items: center;
+		white-space: nowrap;
+	}
+
 	.td {
 		display: table-cell;
 		padding: 4px;

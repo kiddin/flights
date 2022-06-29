@@ -40,6 +40,7 @@
 	let fieldColor = 'grey';
 	let fieldPaymentType = '';
 	let fieldNotes = '';
+	let fieldComplete = false;
 
 	let total_rows;
 	let page = 1;
@@ -65,7 +66,7 @@
 		const allDocs = await db
 			.query(emap, {
 				include_docs: true,
-				descending: true,
+				// descending: true,
 				limit: page * per_page
 			})
 			.then(function (result) {
@@ -199,6 +200,7 @@
 
 <div class="table" bind:this={table}>
 	<div class="tr thead" class:shadow={y > 1} style="top: {navHeight - 1}px">
+		<div class="th" />
 		<div class="th">Operator</div>
 		<div class="th">A/C type</div>
 		<div class="th">From</div>
@@ -210,9 +212,12 @@
 		<div class="th" style="text-align: center;">Color</div>
 		<div class="th">Payment Type</div>
 		<div class="th">Notes</div>
+		<div class="th">Complete</div>
 		<div class="th" />
 	</div>
 	<form on:submit|preventDefault={add}>
+		<div class="td">
+		</div>
 		<div class="td">
 			<input placeholder="OPERATOR" type="text" bind:value={fieldOperator} />
 		</div>

@@ -3,8 +3,6 @@
 	import { user, logout } from '../../hooks/auth';
 
 	import { onMount } from 'svelte';
-	import Colors from './Colors.svelte';
-	import Datepicker from './Datepicker.svelte';
 	import Flight from './Flight.svelte';
 
 	import logo from '/static/logo.png';
@@ -29,18 +27,6 @@
 			console.log('Replication error:', err);
 		});
 
-	let fieldOperator = '';
-	let fieldACType = '';
-	let fieldFrom = '';
-	let fieldTo = '';
-	let fieldETA = '';
-	let fieldETD = '';
-	let fieldPAX = '';
-	let fieldStatus = '';
-	let fieldColor = 'grey';
-	let fieldPaymentType = '';
-	let fieldNotes = '';
-
 	let total_rows;
 	let page = 1;
 	let per_page = 20;
@@ -63,7 +49,7 @@
 		const allDocs = await db
 			.query(emap, {
 				include_docs: true,
-				descending: true,
+				// descending: true,
 				limit: page * per_page
 			})
 			.then(function (result) {
@@ -102,47 +88,6 @@
 			flights = [...flights, ...allDocs.rows.map((row) => row.doc)];
 		}
 		isLoading = false;
-	}
-
-	// Event handlers for adding, updating and removing flights
-	async function add(event) {
-		const newFlight = {
-			fieldOperator: fieldOperator,
-			fieldACType: fieldACType,
-			fieldFrom: fieldFrom,
-			fieldTo: fieldTo,
-			fieldETA: fieldETA,
-			fieldETD: fieldETD,
-			fieldPAX: fieldPAX,
-			fieldStatus: fieldStatus,
-			fieldColor: fieldColor,
-			fieldPaymentType: fieldPaymentType,
-			fieldNotes: fieldNotes,
-			createdAt: new Date().toISOString()
-		};
-		const addition = await db.post(newFlight);
-		if (addition.ok) {
-			await updateFlights();
-		}
-		fieldOperator = '';
-		fieldACType = '';
-		fieldFrom = '';
-		fieldTo = '';
-		fieldETA = '';
-		fieldETD = '';
-		fieldPAX = '';
-		fieldStatus = '';
-		fieldColor = 'grey';
-		fieldPaymentType = '';
-		fieldNotes = '';
-	}
-
-	async function updateFlight(event) {
-		const { flight } = event.detail;
-		const update = await db.put(flight);
-		if (update.ok) {
-			await updateFlights();
-		}
 	}
 
 	async function removeItem(event) {
@@ -211,7 +156,9 @@
 	</div>
 	{#if flights.length}
 		{#each flights as flight (flight._id)}
-			<Flight {flight} on:remove={removeItem} on:update={updateFlight} />
+			{#if !flight.fieldComplete}
+				<Flight {flight} on:remove={removeItem} />
+			{/if}
 		{/each}
 	{/if}
 </div>
