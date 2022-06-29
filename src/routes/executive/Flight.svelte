@@ -10,7 +10,7 @@
 
 <div class="tr" transition:fade>
 	<div class="td">
-		<div class="input-preview">{flight.fieldACType}</div>
+		<div class="input-preview">{flight.fieldOperator}</div>
 	</div>
 	<div class="td">
 		<div class="input-preview">{flight.fieldACType}</div>

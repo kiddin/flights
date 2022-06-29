@@ -268,6 +268,7 @@
 		padding: 1vw 8px;
 		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
 	}
 	.thead.shadow {
 		box-shadow: 0 0 10px #00000030;
