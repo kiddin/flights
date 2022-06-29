@@ -4,7 +4,7 @@
 	import debounce  from 'lodash';
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
-	import { clickOutside } from '../../../../hooks/clickOutside';
+	import { clickOutside } from '../../../hooks/clickOutside';
 
 	const dispatch = createEventDispatcher();
 
