@@ -51,7 +51,7 @@
 			.query(emap, {
 				include_docs: true,
 				// descending: true,
-				limit: page * per_page
+				// limit: page * per_page
 			})
 			.then(function (result) {
 				return result;

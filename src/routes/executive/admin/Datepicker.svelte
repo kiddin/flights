@@ -1,7 +1,7 @@
 <script>
 	import Flatpickr from 'svelte-flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
 	export let value = '';
 	export let id = (Math.random() + 1).toString(36).substring(7);
@@ -27,6 +27,10 @@
 	// $: dispatch('update', {
 	// 	value: value
 	// });
+	let isLoaded = false;
+	onMount(() => {
+		isLoaded = true;
+	})
 </script>
 
 <Flatpickr options={{ enableTime: true, time_24hr: true }} bind:value name="date" element="#{id}">

@@ -1,10 +1,11 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import debounce from 'lodash';
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
 	import { clickOutside } from '../../../hooks/clickOutside';
+import { browser } from '$app/env';
 
 	const dispatch = createEventDispatcher();
 
@@ -35,13 +36,17 @@
 
 	export let flight;
 	let intentDelete = false;
-	let deleteButton;
 
 	function handleKeydown(event) {
 		if (event.key === 'Escape') {
 			intentDelete = false;
 		}
 	}
+	let isLoaded = false;
+
+	onMount(() => {
+		isLoaded = true;
+	})
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -86,22 +91,10 @@
 		/>
 	</div>
 	<div class="td">
-		<!-- <input
-			placeholder="DD/MM/YY HH:MM"
-			type="text"
-			on:keyup={debouncedUpdateFlight}
-			bind:value={flight.fieldETA}
-		/> -->
-		<Datepicker bind:value={flight.fieldETA} id={'flightETA-' + flight._id} />
+		<Datepicker bind:value={flight.fieldETA} id={'flightETA-' + flight._id + Math.round(Math.random()*100)} />
 	</div>
 	<div class="td">
-		<!-- <input
-			placeholder="DD/MM/YY HH:MM"
-			type="text"
-			on:keyup={debouncedUpdateFlight}
-			bind:value={flight.fieldETD}
-		/> -->
-		<Datepicker bind:value={flight.fieldETD} id={'flightETD-' + flight._id} />
+		<Datepicker bind:value={flight.fieldETD} id={'flightETD-' + flight._id + Math.round(Math.random()*100)} />
 	</div>
 	<div class="td">
 		<input

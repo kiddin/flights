@@ -254,7 +254,7 @@
 		</div>
 	</form>
 	{#if flights.length}
-		{#each flights as flight (flight._id)}
+		{#each flights as flight (flight._id + Math.random())}
 			<Flight {flight} on:remove={removeItem} on:update={updateFlight} />
 		{/each}
 	{/if}
