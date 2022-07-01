@@ -46,6 +46,7 @@
 	// in a Redux reducer. It also saves us from having to rebuild the local state flights from the data we sent
 	// to the database and the `_id` and `_rev` values that were sent back.
 	async function updateFlights() {
+		console.log("update flights")
 		const allDocs = await db
 			.query(emap, {
 				include_docs: true,
@@ -104,7 +105,7 @@
 
 	function timedRefresh(timeoutPeriod) {
 		// setTimeout('location.reload(true);', timeoutPeriod);
-		setTimeout(() => {
+		setInterval(() => {
 			updateFlights();
 		}, timeoutPeriod);
 	}
@@ -113,7 +114,7 @@
 	onMount(async () => {
 		await updateFlights();
 
-		timedRefresh(60000);
+		timedRefresh(5000);
 	});
 
 	let y, h, table;
