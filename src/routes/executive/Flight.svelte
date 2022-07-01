@@ -1,14 +1,13 @@
 <script>
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
-	import { fade } from 'svelte/transition';
 
 	// We don’t want to clobber the local DB, so we debounce saving on every keystroke
 
 	export let flight;
 </script>
 
-<div class="tr" transition:fade>
+<div class="tr" >
 	<div class="td">
 		<div class="input-preview">{flight.fieldOperator}</div>
 	</div>
@@ -28,7 +27,7 @@
 			on:keyup={debouncedUpdateFlight}
 			bind:value={flight.fieldETA}
 		/> -->
-		<Datepicker bind:value={flight.fieldETA} id={'flightETA-' + flight._id} />
+		<Datepicker bind:value={flight.fieldETA} />
 	</div>
 	<div class="td">
 		<!-- <input
@@ -37,7 +36,7 @@
 			on:keyup={debouncedUpdateFlight}
 			bind:value={flight.fieldETD}
 		/> -->
-		<Datepicker bind:value={flight.fieldETD} id={'flightETD-' + flight._id} />
+		<Datepicker bind:value={flight.fieldETD} />
 	</div>
 	<div class="td">
 		<div class="input-preview">{flight.fieldPAX}</div>

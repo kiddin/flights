@@ -102,9 +102,15 @@
 		}
 	}
 
+	function timedRefresh(timeoutPeriod) {
+		setTimeout('location.reload(true);', timeoutPeriod);
+	}
+
 	// Load flights on first run
 	onMount(async () => {
 		await updateFlights();
+
+		timedRefresh(5000);
 	});
 
 	let y, h, table;
@@ -155,7 +161,7 @@
 		<div class="th">Notes</div>
 	</div>
 	{#if flights.length}
-		{#each flights as flight (flight._id)}
+		{#each flights as flight}
 			{#if !flight.fieldComplete}
 				<Flight {flight} on:remove={removeItem} />
 			{/if}
