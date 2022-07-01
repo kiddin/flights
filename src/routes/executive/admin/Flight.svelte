@@ -1,11 +1,9 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
 	import debounce from 'lodash';
 	import Colors from './Colors.svelte';
 	import Datepicker from './Datepicker.svelte';
 	import { clickOutside } from '../../../hooks/clickOutside';
-import { browser } from '$app/env';
 
 	const dispatch = createEventDispatcher();
 
@@ -51,7 +49,7 @@ import { browser } from '$app/env';
 
 <svelte:window on:keydown={handleKeydown} />
 
-<form on:submit|preventDefault={updateFields} transition:fade>
+<form on:submit|preventDefault={updateFields} >
 	<div class="td">
 		<div class="toggle-status" on:click={toggleStatus}>
 			{#if flight.fieldComplete}Y{:else}N{/if}
