@@ -103,7 +103,10 @@
 	}
 
 	function timedRefresh(timeoutPeriod) {
-		setTimeout('location.reload(true);', timeoutPeriod);
+		// setTimeout('location.reload(true);', timeoutPeriod);
+		setTimeout(() => {
+			updateFlights();
+		}, timeoutPeriod);
 	}
 
 	// Load flights on first run
