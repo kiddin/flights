@@ -110,7 +110,7 @@
 	onMount(async () => {
 		await updateFlights();
 
-		timedRefresh(5000);
+		timedRefresh(60000);
 	});
 
 	let y, h, table;
