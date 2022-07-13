@@ -73,6 +73,7 @@
 				limit: page * per_page
 			})
 			.then(function (result) {
+				console.log("flights", result)
 				return result;
 			})
 			.catch(function (err) {

@@ -57,11 +57,14 @@
 				// limit: page * per_page
 			})
 			.then(function (result) {
+				console.log(result)
 				return result;
 			})
 			.catch(function (err) {
 				console.log(err);
 			});
+		console.log(allDocs);
+
 		total_rows = allDocs.total_rows;
 		flights = allDocs.rows.map((row) => row.doc);
 		isLoading = false;
