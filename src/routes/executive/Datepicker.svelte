@@ -37,7 +37,7 @@
 </script>
 
 <div class="input-button" class:empty={!value} data-toggle>
-	<big>{hour || '??:??'}</big><br /><small>{date || '????-??-??'}</small>
+	<big>{hour || ''}</big><br /><small>{date || ''}</small>
 </div>
 
 <style>

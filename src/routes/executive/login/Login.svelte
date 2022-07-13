@@ -2,6 +2,8 @@
 	import { getUserDetails } from '../../../hooks/auth';
 	import { user } from '../../../hooks/auth';
 
+	import icon_login from '../../../../static/icon-arrow-right.svg';
+
 	let username = '';
 	let password = '';
 	let error = '';
@@ -46,7 +48,7 @@
 		bind:value={password}
 	/>
 
-	<button type="submit"><img src="/static/icon-arrow-right.svg" alt="login" /></button>
+	<button type="submit"><img src={icon_login} alt="login" /></button>
 	<div id="error_message">
 		<small>{error}</small>
 	</div>
