@@ -32,6 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-node": "^1.0.0-next.79",
 		"events": "^3.3.0",
 		"lodash": "^4.17.21",
 		"pouchdb": "^7.3.0",
