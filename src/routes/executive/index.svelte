@@ -12,7 +12,7 @@
 	$: if ($user == null && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
-	const replication = PouchDB.sync('db', 'http://46.233.0.11:5984/svelte-flight-db', {
+	const replication = PouchDB.sync('db', 'http://78.83.69.35:5984/svelte-flight-db', {
 		live: true,
 		retry: true,
 		withCredentials: false,
