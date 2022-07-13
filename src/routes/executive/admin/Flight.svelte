@@ -5,6 +5,9 @@
 	import Datepicker from './Datepicker.svelte';
 	import { clickOutside } from '../../../hooks/clickOutside';
 
+	import icon_times from '/static/icon-times.svg'
+	import icon_check from '/static/icon-check.svg'
+
 	const dispatch = createEventDispatcher();
 
 	function remove() {
@@ -130,12 +133,12 @@
 		/>
 	</div>
 	<div class="td">
-		<button type="submit"><img src="/static/icon-check.svg" alt="update" /></button>
+		<button type="submit"><img src="{icon_check}" alt="update" /></button>
 		{#if !intentDelete}
 			<button
 				on:click={() => {
 					intentDelete = true;
-				}}><img src="/static/icon-times.svg" alt="remove" /></button
+				}}><img src="{icon_times}" alt="remove" /></button
 			>
 		{:else}
 			<button
@@ -144,7 +147,7 @@
 				use:clickOutside
 				on:click_outside={() => {
 					intentDelete = false;
-				}}><img src="/static/icon-times.svg" alt="remove" /></button
+				}}><img src="{icon_times}" alt="remove" /></button
 			>
 		{/if}
 	</div>

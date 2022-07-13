@@ -9,6 +9,9 @@
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
 
+	import icon_logout from '../../../static/icon-logout.svg'
+
+
 	$: if ($user == null && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
@@ -147,7 +150,7 @@
 		EXECUTIVE
 	</div>
 	<button class="logout" on:click={logout}
-		><img src="/static/icon-logout.svg" width="15" alt="logout" /></button
+		><img src="{icon_logout}" width="15" alt="logout" /></button
 	>
 </nav>
 

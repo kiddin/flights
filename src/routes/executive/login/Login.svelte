@@ -2,7 +2,8 @@
 	import { getUserDetails } from '../../../hooks/auth';
 	import { user } from '../../../hooks/auth';
 
-	import icon_login from '../../../../static/icon-arrow-right.svg';
+	import logo from '/static/logo.png';
+	import icon_login from '/static/icon-arrow-right.svg';
 
 	let username = '';
 	let password = '';
@@ -26,7 +27,7 @@
 <nav>
 	<h1>&nbsp;</h1>
 	<div class="logo">
-		<img alt="swissport logo" src="/static/logo.png" />
+		<img alt="swissport logo" src="{logo}" />
 		EXECUTIVE
 	</div>
 </nav>

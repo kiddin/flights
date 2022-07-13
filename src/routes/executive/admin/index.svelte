@@ -11,6 +11,9 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 
+	import icon_plus from '/static/icon-plus.svg'
+	import icon_logout from '/static/icon-logout.svg'
+
 	$: if ($user != 'admin' && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
@@ -192,7 +195,7 @@
 		EXECUTIVE
 	</div>
 	<button class="logout" on:click={logout}
-		><img src="/static/icon-logout.svg" width="15" alt="logout" /></button
+		><img src="{icon_logout}" width="15" alt="logout" /></button
 	>
 </nav>
 
@@ -250,7 +253,7 @@
 			<textarea placeholder="Enter notes" type="text" bind:value={fieldNotes} />
 		</div>
 		<div class="td">
-			<button type="submit"><img src="/static/icon-plus.svg" alt="add" /></button>
+			<button type="submit"><img src="{icon_plus}" alt="add" /></button>
 		</div>
 	</form>
 	{#if flights.length}
