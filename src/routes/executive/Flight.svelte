@@ -9,8 +9,6 @@
 
 <div class="tr" >
 	<div class="td">
-		{(new Date(flight.fieldETA).getTime()*1 || 0) + (new Date(flight.fieldETD).getTime()*1 || 0)}
-
 		<div class="input-preview">{flight.fieldOperator}</div>
 	</div>
 	<div class="td">
