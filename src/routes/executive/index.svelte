@@ -60,7 +60,7 @@
 			// .allDocs({
 			// 	include_docs: true
 			// })
-			.query(emap, {
+			.query('docs', {
 				include_docs: true
 				// descending: true,
 				// limit: page * per_page
