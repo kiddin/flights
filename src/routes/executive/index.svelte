@@ -115,9 +115,9 @@
 		await updateFlights();
 
 		// timedRefresh(5000);
-		window.onerror = () => {
-			location.reload();
-		};
+		// window.onerror = () => {
+		// 	location.reload();
+		// };
 	});
 
 	let y, h, table;
