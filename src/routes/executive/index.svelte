@@ -9,20 +9,23 @@
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
 
-	import icon_logout from '../../../static/icon-logout.svg'
-
+	import icon_logout from '../../../static/icon-logout.svg';
 
 	$: if ($user == null && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
-	const replication = PouchDB.sync('db', 'http://admin:Xdream12345@78.83.69.35:5984/svelte-flight-db', {
-		live: true,
-		retry: true,
-		// withCredentials: false,
-		// ajax: {
-		// 	withCredentials: false
-		// }
-	})
+	const replication = PouchDB.sync(
+		'db',
+		'http://admin:Xdream12345@78.83.69.35:5984/svelte-flight-db',
+		{
+			live: true,
+			retry: true
+			// withCredentials: false,
+			// ajax: {
+			// 	withCredentials: false
+			// }
+		}
+	)
 		.on('change', async function (info) {
 			await updateFlights();
 		})
@@ -51,13 +54,16 @@
 	async function updateFlights() {
 		console.log('update flights');
 		const allDocs = await db
-			.query(emap, {
+			.allDocs({
 				include_docs: true
-				// descending: true,
-				// limit: page * per_page
 			})
+			// .query(emap, {
+			// 	include_docs: true
+			// 	// descending: true,
+			// 	// limit: page * per_page
+			// })
 			.then(function (result) {
-				console.log(result)
+				console.log(result);
 				return result;
 			})
 			.catch(function (err) {
@@ -152,8 +158,7 @@
 		<img alt="swissport logo" src={logo} />
 		EXECUTIVE
 	</div>
-	<button class="logout" on:click={logout}
-		><img src="{icon_logout}" width="15" alt="logout" /></button
+	<button class="logout" on:click={logout}><img src={icon_logout} width="15" alt="logout" /></button
 	>
 </nav>
 
