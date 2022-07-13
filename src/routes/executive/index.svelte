@@ -44,8 +44,11 @@
 	function emit(val) {}
 
 	function emap(doc) {
-		// sort by last name, first name, and age
-		emit([doc.fieldETA + doc.fieldETD]);
+		let divide = 1;
+		if (doc.fieldETA && doc.fieldETD) divide = 2;
+		emit([
+			((new Date(doc.fieldETA).getTime() * 1 || 0) + (new Date(doc.fieldETD).getTime() * 1 || 0)) / divide
+		]);
 	}
 	// Helper for reloading all flights from the local PouchDB. It’s on-device and haso basically zero latency,
 	// so we can use it quite liberally instead of keeping our local state up to date like you’d do
@@ -54,14 +57,14 @@
 	async function updateFlights() {
 		console.log('update flights');
 		const allDocs = await db
-			.allDocs({
-				include_docs: true
-			})
-			// .query(emap, {
+			// .allDocs({
 			// 	include_docs: true
-			// 	// descending: true,
-			// 	// limit: page * per_page
 			// })
+			.query(emap, {
+				include_docs: true
+				// descending: true,
+				// limit: page * per_page
+			})
 			.then(function (result) {
 				console.log(result);
 				return result;
