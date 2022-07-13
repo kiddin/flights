@@ -12,13 +12,13 @@
 	$: if ($user == null && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
-	const replication = PouchDB.sync('db', 'http://78.83.69.35:5984/svelte-flight-db', {
+	const replication = PouchDB.sync('db', 'http://admin:Xdream12345@78.83.69.35:5984/svelte-flight-db', {
 		live: true,
 		retry: true,
-		withCredentials: false,
-		ajax: {
-			withCredentials: false
-		}
+		// withCredentials: false,
+		// ajax: {
+		// 	withCredentials: false
+		// }
 	})
 		.on('change', async function (info) {
 			await updateFlights();
