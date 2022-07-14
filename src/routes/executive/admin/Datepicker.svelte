@@ -9,17 +9,32 @@
 	let hour = '',
 		date = '';
 
+	const MONTHS = [
+		'JAN',
+		'FEB',
+		'MAR',
+		'APR',
+		'MAY',
+		'JUN',
+		'JUL',
+		'AUG',
+		'SEP',
+		'OCT',
+		'NOV',
+		'DEC'
+	];
+
 	$: {
 		let now = new Date(Date.parse(value));
 		hour = value
 			? String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0')
 			: undefined;
 		date = value
-			? now.getFullYear() +
-			  '-' +
-			  String(now.getMonth() + 1).padStart(2, '0') +
-			  '-' +
-			  String(now.getDate()).padStart(2, '0')
+			? String(now.getDate()).padStart(2, '0') +
+			  '' +
+			  MONTHS[now.getMonth()] +
+			  '' +
+			  now.getFullYear()
 			: undefined;
 	}
 	// const dispatch = createEventDispatcher();
@@ -30,7 +45,7 @@
 	let isLoaded = false;
 	onMount(() => {
 		isLoaded = true;
-	})
+	});
 </script>
 
 <Flatpickr options={{ enableTime: true, time_24hr: true }} bind:value name="date" element="#{id}">
@@ -67,8 +82,10 @@
 		font-size: 2vw;
 	}
 	.flatpickr .input-button small {
-		font-size: min(13px, 1.5vw);
+		font-size: 0.85vw;
+		letter-spacing: 0;
 		position: absolute;
 		white-space: nowrap;
+		top: calc(100% - 1vw - 7px);
 	}
 </style>

@@ -1,6 +1,4 @@
 <script>
-	import 'flatpickr/dist/flatpickr.css';
-
 	export let value = '';
 
 	let hour = '',
@@ -42,7 +40,7 @@
 
 <style>
 	.input-button {
-		letter-spacing: -.1vw;
+		letter-spacing: -0.1vw;
 		text-align: left;
 		font-family: inherit;
 		border: none;
@@ -56,7 +54,7 @@
 		font-size: 2vw;
 	}
 	.input-button small {
-		font-size: .85vw;
+		font-size: 0.85vw;
 		letter-spacing: 0;
 		position: absolute;
 		white-space: nowrap;

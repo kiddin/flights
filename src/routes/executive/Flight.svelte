@@ -21,21 +21,9 @@
 		<div class="input-preview">{flight.fieldTo}</div>
 	</div>
 	<div class="td">
-		<!-- <input
-			placeholder="DD/MM/YY HH:MM"
-			type="text"
-			on:keyup={debouncedUpdateFlight}
-			bind:value={flight.fieldETA}
-		/> -->
 		<Datepicker bind:value={flight.fieldETA} />
 	</div>
 	<div class="td">
-		<!-- <input
-			placeholder="DD/MM/YY HH:MM"
-			type="text"
-			on:keyup={debouncedUpdateFlight}
-			bind:value={flight.fieldETD}
-		/> -->
 		<Datepicker bind:value={flight.fieldETD} />
 	</div>
 	<div class="td">

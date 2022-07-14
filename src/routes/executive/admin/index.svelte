@@ -67,47 +67,19 @@
 	// to the database and the `_id` and `_rev` values that were sent back.
 	async function updateFlights() {
 		const allDocs = await db
-			.query(emap, {
-				include_docs: true,
-				// descending: true,
-				limit: page * per_page
+			.query('docs', {
+				include_docs: true
 			})
 			.then(function (result) {
-				console.log("flights", result)
+				console.log(result);
 				return result;
 			})
 			.catch(function (err) {
 				console.log(err);
 			});
+
 		total_rows = allDocs.total_rows;
 		flights = allDocs.rows.map((row) => row.doc);
-		isLoading = false;
-	}
-
-	async function loadMoreFlights() {
-		isLoading = true;
-		if (flights.length >= total_rows || !flights.length) {
-			isLoading = false;
-			return;
-		}
-		page++;
-		const allDocs = await db
-			.query(emap, {
-				include_docs: true,
-				descending: true,
-				limit: per_page,
-				skip: per_page * (page - 1)
-			})
-			.then(function (result) {
-				isLoading = false;
-				return result;
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
-		if (allDocs.rows) {
-			flights = [...flights, ...allDocs.rows.map((row) => row.doc)];
-		}
 		isLoading = false;
 	}
 
@@ -170,12 +142,6 @@
 	});
 
 	let y, h, table;
-
-	$: if (flights.length && !isLoading) {
-		if (table.offsetTop + table.offsetHeight <= y + h + 20) {
-			loadMoreFlights();
-		}
-	}
 
 	let nav, navHeight;
 	$: if (nav) navHeight = nav.offsetHeight;

@@ -47,7 +47,8 @@
 		let divide = 1;
 		if (doc.fieldETA && doc.fieldETD) divide = 2;
 		emit([
-			((new Date(doc.fieldETA).getTime() * 1 || 0) + (new Date(doc.fieldETD).getTime() * 1 || 0)) / divide
+			((new Date(doc.fieldETA).getTime() * 1 || 0) + (new Date(doc.fieldETD).getTime() * 1 || 0)) /
+				divide
 		]);
 	}
 	// Helper for reloading all flights from the local PouchDB. It’s on-device and haso basically zero latency,
@@ -55,15 +56,9 @@
 	// in a Redux reducer. It also saves us from having to rebuild the local state flights from the data we sent
 	// to the database and the `_id` and `_rev` values that were sent back.
 	async function updateFlights() {
-		console.log('update flights');
 		const allDocs = await db
-			// .allDocs({
-			// 	include_docs: true
-			// })
 			.query('docs', {
 				include_docs: true
-				// descending: true,
-				// limit: page * per_page
 			})
 			.then(function (result) {
 				console.log(result);
@@ -72,37 +67,9 @@
 			.catch(function (err) {
 				console.log(err);
 			});
-		console.log(allDocs);
 
 		total_rows = allDocs.total_rows;
 		flights = allDocs.rows.map((row) => row.doc);
-		isLoading = false;
-	}
-
-	async function loadMoreFlights() {
-		isLoading = true;
-		if (flights.length >= total_rows || !flights.length) {
-			isLoading = false;
-			return;
-		}
-		page++;
-		const allDocs = await db
-			.query(emap, {
-				include_docs: true,
-				descending: true,
-				limit: per_page,
-				skip: per_page * (page - 1)
-			})
-			.then(function (result) {
-				isLoading = false;
-				return result;
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
-		if (allDocs.rows) {
-			flights = [...flights, ...allDocs.rows.map((row) => row.doc)];
-		}
 		isLoading = false;
 	}
 
@@ -136,12 +103,6 @@
 	});
 
 	let y, h, table;
-
-	$: if (flights.length && !isLoading) {
-		if (table.offsetTop + table.offsetHeight <= y + h + 20) {
-			loadMoreFlights();
-		}
-	}
 
 	let nav, navHeight;
 	$: if (nav) navHeight = nav.offsetHeight;
