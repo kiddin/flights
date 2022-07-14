@@ -20,10 +20,6 @@
 		{
 			live: true,
 			retry: true
-			// withCredentials: false,
-			// ajax: {
-			// 	withCredentials: false
-			// }
 		}
 	)
 		.on('change', async function (info) {
@@ -34,27 +30,11 @@
 		});
 
 	let total_rows;
-	let page = 1;
-	let per_page = 20;
 
 	let isLoading = true;
 	// All the flights directly from the PouchDB. Sorting and filtering comes later
 	let flights = [];
 
-	function emit(val) {}
-
-	function emap(doc) {
-		let divide = 1;
-		if (doc.fieldETA && doc.fieldETD) divide = 2;
-		emit([
-			((new Date(doc.fieldETA).getTime() * 1 || 0) + (new Date(doc.fieldETD).getTime() * 1 || 0)) /
-				divide
-		]);
-	}
-	// Helper for reloading all flights from the local PouchDB. It’s on-device and haso basically zero latency,
-	// so we can use it quite liberally instead of keeping our local state up to date like you’d do
-	// in a Redux reducer. It also saves us from having to rebuild the local state flights from the data we sent
-	// to the database and the `_id` and `_rev` values that were sent back.
 	async function updateFlights() {
 		const allDocs = await db
 			.query('docs', {
@@ -86,23 +66,22 @@
 	}
 
 	function timedRefresh(timeoutPeriod) {
-		// setTimeout('location.reload(true);', timeoutPeriod);
 		setInterval(() => {
 			updateFlights();
 		}, timeoutPeriod);
 	}
 
-	// Load flights on first run
+
 	onMount(async () => {
 		await updateFlights();
 
-		// timedRefresh(5000);
-		// window.onerror = () => {
-		// 	location.reload();
-		// };
+		timedRefresh(30000);
+		window.onerror = () => {
+			location.reload();
+		};
 	});
 
-	let y, h, table;
+	let y, h;
 
 	let nav, navHeight;
 	$: if (nav) navHeight = nav.offsetHeight;
@@ -128,7 +107,7 @@
 
 <svelte:window bind:scrollY={y} bind:innerHeight={h} />
 
-<div class="table" bind:this={table}>
+<div class="table">
 	<div class="tr thead" class:shadow={y > 1} style="top: {navHeight - 1}px">
 		<div class="th">Operator</div>
 		<div class="th">A/C type</div>

@@ -11,20 +11,24 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 
-	import icon_plus from '/static/icon-plus.svg'
-	import icon_logout from '/static/icon-logout.svg'
+	import icon_plus from '/static/icon-plus.svg';
+	import icon_logout from '/static/icon-logout.svg';
 
 	$: if ($user != 'admin' && browser) goto('/executive/login');
 
 	let db = new PouchDB('db');
-	const replication = PouchDB.sync('db', 'http://admin:Xdream12345@78.83.69.35:5984/svelte-flight-db', {
-		live: true,
-		retry: true,
-		// withCredentials: false,
-		// ajax: {
-		// 	withCredentials: false
-		// }
-	})
+	const replication = PouchDB.sync(
+		'db',
+		'http://admin:Xdream12345@78.83.69.35:5984/svelte-flight-db',
+		{
+			live: true,
+			retry: true
+			// withCredentials: false,
+			// ajax: {
+			// 	withCredentials: false
+			// }
+		}
+	)
 		.on('change', async function (info) {
 			await updateFlights();
 		})
@@ -52,8 +56,6 @@
 	let isLoading = true;
 	// All the flights directly from the PouchDB. Sorting and filtering comes later
 	let flights = [];
-
-	let myDate = '2021-11-11';
 
 	function emit(val) {}
 
@@ -136,12 +138,23 @@
 		}
 	}
 
+	function timedRefresh(timeoutPeriod) {
+		setInterval(() => {
+			updateFlights();
+		}, timeoutPeriod);
+	}
+
 	// Load flights on first run
 	onMount(async () => {
 		await updateFlights();
+
+		timedRefresh(30000);
+		window.onerror = () => {
+			location.reload();
+		};
 	});
 
-	let y, h, table;
+	let y, h;
 
 	let nav, navHeight;
 	$: if (nav) navHeight = nav.offsetHeight;
@@ -161,16 +174,15 @@
 		<img alt="swissport logo" src={logo} />
 		EXECUTIVE
 	</div>
-	<button class="logout" on:click={logout}
-		><img src="{icon_logout}" width="15" alt="logout" /></button
+	<button class="logout" on:click={logout}><img src={icon_logout} width="15" alt="logout" /></button
 	>
 </nav>
 
 <svelte:window bind:scrollY={y} bind:innerHeight={h} />
 
-<div class="table" bind:this={table}>
+<div class="table">
 	<div class="tr thead" class:shadow={y > 1} style="top: {navHeight - 1}px">
-		<div class="th" >Comp</div>
+		<div class="th">Comp</div>
 		<div class="th">Operator</div>
 		<div class="th">A/C type</div>
 		<div class="th">From</div>
@@ -220,7 +232,7 @@
 			<textarea placeholder="Enter notes" type="text" bind:value={fieldNotes} />
 		</div>
 		<div class="td">
-			<button type="submit"><img src="{icon_plus}" alt="add" /></button>
+			<button type="submit"><img src={icon_plus} alt="add" /></button>
 		</div>
 	</form>
 	{#if flights.length}
